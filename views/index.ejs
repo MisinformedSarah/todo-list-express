@@ -23,19 +23,30 @@
     
     <ul>
         <li class=""> 
-        <% for(let i=0, i=todoItem.length,i++){%>
-            <%if(todoItem[i]){%>
-                <span>todoItem[i]</span>
+        <% for(let i=0; i<infoComplete.length;i++){%>
+            <%if(infoComplete[i]){%>
+                <span><%= infoComplete[i].thing %></span>
             <%}else{%>
                 <span>erorr</span>
-            <%}
+            <%}%>
         <%}%>
-        
-        
+        </li>
+    </ul>
+    <h1>Not Done</h1>
+     <ul>
+        <li class=""> 
+        <% for(let i=0; i<infoNotComplete.length;i++){%>
+            <%if(infoNotComplete[i]){%>
+                <span><%= infoNotComplete[i].thing %></span>
+            <%}else{%>
+                <span>erorr</span>
+            <%}%>
+        <%}%>
         </li>
     </ul>
 
     
+
 
    
 
