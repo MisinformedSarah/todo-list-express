@@ -22,27 +22,28 @@
    
     
     <ul>
-        <li class=""> 
+        
         <% for(let i=0; i<infoComplete.length;i++){%>
-            <%if(infoComplete[i]){%>
-                <span><%= infoComplete[i].thing %></span>
+               <%if(infoComplete[i]){%>
+                 <% infoComplete.forEach(item => { %>
+                        <li><%= item.thing %></li>
+                    <% }) %>
             <%}else{%>
                 <span>erorr</span>
             <%}%>
         <%}%>
-        </li>
+        
     </ul>
     <h1>Not Done</h1>
      <ul>
-        <li class=""> 
-        <% for(let i=0; i<infoNotComplete.length;i++){%>
-            <%if(infoNotComplete[i]){%>
-                <span><%= infoNotComplete[i].thing %></span>
-            <%}else{%>
-                <span>erorr</span>
-            <%}%>
-        <%}%>
-        </li>
+       <% infoNotComplete.forEach(item => { %>
+                <li class="item">
+                <span><%= item.thing %></span>
+                <button class="fa-trash">delete</button>
+                </li>
+
+         <% }) %>
+
     </ul>
 
     
@@ -53,7 +54,7 @@
     <h2>Add A Todo:</h2>
 
     <form action="/addTodo" method="POST">
-        <input type="text" placeholder="Thing To Do" name="todoItem">
+        <input type="text" placeholder="Thing To Do" name="todoItem" class="addTodo">
         <input type="submit">
     </form>
     
