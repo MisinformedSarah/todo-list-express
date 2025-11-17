@@ -25,7 +25,7 @@ app.get('/',async (request,response)=>{
     const todoItems= await db.collection('todos').find().toArray()
     const todoCompleted= await db.collection('todos').find({completed:true}).toArray()
     const todoNotCompleted= await db.collection('todos').find({completed:false}).toArray()
-    console.log(todoCompleted[0])
+
     response.render('index.ejs',{infoComplete:todoCompleted,infoNotComplete:todoNotCompleted})
     
 })
@@ -44,35 +44,22 @@ app.delete('/deleteItem',async(request,response)=>{
 })
 
 
+app.put('/markUnComplete',async (request,response)=>{
+    await db.collection('todos').updateOne({thing: request.body.itemFromJS},{
+        $set: {
+            completed: false
+          }
+    },{
+        sort: {_id: -1},
+        upsert: false
+    })
+    .then(result => {
+        console.log('Marked Complete not')
+        response.json('Marked Complete not')
+    })
+    .catch(error => console.error(error))
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+})
 
 //     // db.collection('todos').find().toArray()
 //     // .then(data => {
@@ -93,39 +80,24 @@ app.delete('/deleteItem',async(request,response)=>{
 //     .catch(error => console.error(error))
 // })
 
-// app.put('/markComplete', (request, response) => {
-//     db.collection('todos').updateOne({thing: request.body.itemFromJS},{
-//         $set: {
-//             completed: true
-//           }
-//     },{
-//         sort: {_id: -1},
-//         upsert: false
-//     })
-//     .then(result => {
-//         console.log('Marked Complete')
-//         response.json('Marked Complete')
-//     })
-//     .catch(error => console.error(error))
+app.put('/markComplete', (request, response) => {
+    db.collection('todos').updateOne({thing: request.body.itemFromJS},{
+        $set: {
+            completed: true
+          }
+    },{
+        sort: {_id: -1},
+        upsert: false
+    })
+    .then(result => {
+        console.log('Marked Complete')
+        response.json('Marked Complete')
+    })
+    .catch(error => console.error(error))
 
-// })
+})
 
-// app.put('/markUnComplete', (request, response) => {
-//     db.collection('todos').updateOne({thing: request.body.itemFromJS},{
-//         $set: {
-//             completed: false
-//           }
-//     },{
-//         sort: {_id: -1},
-//         upsert: false
-//     })
-//     .then(result => {
-//         console.log('Marked Complete')
-//         response.json('Marked Complete')
-//     })
-//     .catch(error => console.error(error))
-
-// })
+// 
 
 // app.delete('/deleteItem', (request, response) => {
 //     db.collection('todos').deleteOne({thing: request.body.itemFromJS})

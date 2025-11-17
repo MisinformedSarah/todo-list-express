@@ -23,15 +23,12 @@
     
     <ul>
         
-        <% for(let i=0; i<infoComplete.length;i++){%>
-               <%if(infoComplete[i]){%>
-                 <% infoComplete.forEach(item => { %>
-                        <li><%= item.thing %></li>
-                    <% }) %>
-            <%}else{%>
-                <span>erorr</span>
-            <%}%>
-        <%}%>
+        <% infoComplete.forEach(item => { %>
+            <li class="item">
+                <span class="completed"><%= item.thing %></span>
+                <button class="fa-trash">delete</button>
+                </li>
+          <% }) %>
         
     </ul>
     <h1>Not Done</h1>
